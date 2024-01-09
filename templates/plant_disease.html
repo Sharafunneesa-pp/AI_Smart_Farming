@@ -1,0 +1,31 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+
+<section class=" contact section-padding" id="contact">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-7 col-12 mx-auto">
+                <form action="addfile" method="post" class="contact-form" role="form" data-aos="fade-up" style="margin-bottom: 10px;" enctype="multipart/form-data">
+                    
+                    {% csrf_token %}
+                <h2 class="mb-4 text-center" data-aos="fade-up">Plant Disease Detection</h2>
+                    <div class="col-12 my-4">
+                        <label for="file" class="form-label">Upload File</label>
+                        <input type="file" name="file" id="file" class="form-control" required>
+                    </div>
+
+                    <div class="col-lg-5 col-12 mx-auto mt-5">
+                        <button type="submit" class="form-control">Predict</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% include 'footer.html' %} 
+{% endblock %}

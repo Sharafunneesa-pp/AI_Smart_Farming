@@ -1,0 +1,55 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+<section class=" contact section-padding" id="contact">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-7 col-12 mx-auto">
+
+                <h2 class="mb-4 text-center" data-aos="fade-up">Add Product</h2>
+
+                <form action="update_product/{{result.id}}" method="post" class="contact-form" role="form" data-aos="fade-up" enctype="multipart/form-data">
+                    <div class="row">
+                        {% csrf_token %}
+                        
+                        <div class="col-lg-12 col-6">
+                            <label for="product_name" class="form-label">Product Name</label>
+                            <input type="text" name="product_name" id="product_name" class="form-control" placeholder="Enter Product Name" value="{{result.product_name}}" required>
+                        </div>
+
+                        <div class="col-lg-12 col-6">
+                            <label for="crop_type" class="form-label">Crop Type</label>
+                            <input type="text" name="crop_type" id="crop_type" class="form-control" placeholder="Enter the crop type" value="{{result.crop_type}}" required>
+                        </div>
+
+                        <div class="col-lg-12 col-6">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="text" name="price" id="price" class="form-control" placeholder="Enter the price" value="{{result.price}}" required>
+                        </div>
+
+                        <div class="col-lg-12 col-6">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Enter the quantity" value="{{result.quantity}}" required>
+                        </div>
+
+                        <div class="col-12 my-4">
+                            <label for="myfile1" class="form-label">Upload Image</label>
+                            <input type="file" name="image" id="image" class="form-control" required>
+                        </div>
+    
+                        <div class="col-lg-5 col-12 mx-auto mt-5">
+                            <button type="submit" class="form-control">Update</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html' %} 
+{% endblock %}

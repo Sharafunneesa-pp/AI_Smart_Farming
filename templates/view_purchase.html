@@ -1,0 +1,99 @@
+{% block content %}
+{% load static %}
+{% include 'header.html' %}
+
+{% if msg %}
+   <script>
+      alert('{{ msg }}');
+   </script>
+{% endif %}
+
+<style>
+.table-view {
+    width: 100%;
+    margin: 20px;
+}
+
+.table-view table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-view th, .table-view td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.table-view th {
+    background-color: #f2f2f2;
+}
+
+.table-view tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-view tr:hover {
+    background-color: #e5e5e5;
+}
+
+</style>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h2><center>PURCHASE DETAILS</center></h2>
+<div class="container">
+    <div class="table-view">
+        <table id="tblCustomers1">
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>User Name</th>
+                    <th>Date</th>
+                    <th>User Id</th>
+                    <th>Product Id</th>
+                    <th>Product Name</th>
+                    <th>Rate</th>
+                    <th>Phone Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in result %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.uid}}</td>
+                    <td>{{i.pr_id}}</td>
+                    <td>{{i.product_name}}</td>
+                    <td>{{i.rate}}</td>
+                    <td>{{i.phone}}</td>
+                    <td id="status_{{ i.pk }}">{{ i.status }}</td>
+                    <td>
+                        {% if i.status == 'booked' %}
+                                <a class="btn btn-primary" href="http://127.0.0.1:8000/update_status/{{ i.id }}">Ship</a>
+                        {% elif i.status == 'shipped' %}
+                                <a class="btn btn-primary" href="http://127.0.0.1:8000/update_status/{{ i.id }}">Delivery</a>
+                        {% endif %}
+                            </td>
+
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+{% include 'footer.html' %}
+{% endblock %}
+

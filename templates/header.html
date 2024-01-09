@@ -1,0 +1,281 @@
+{% block content %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        {% csrf_token %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Farm Assist</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet">
+
+        <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+        <link href="{% static 'css/aos.css' %}" rel="stylesheet">
+
+        <link href="{% static 'css/templatemo-nomad-force.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <style>
+            .chat-popup {
+              display: none;
+              position: fixed;
+              bottom: 15px;
+              right: 15px;
+              max-width: 400px;
+              background-color: #f9f9f9;
+              box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+              z-index: 9999;
+              border-radius: 5px;
+            }
+          
+            .chat-container {
+              padding: 10px;
+              max-height: 300px;
+              overflow-y: auto;
+            }
+          
+            .chat-container p {
+              margin: 5px 0;
+            }
+          
+            .chat-input {
+              width: 100%;
+              padding: 5px;
+              border: none;
+              border-top: 1px solid #ccc;
+              resize: none;
+              outline: none;
+            }
+          
+            .chat-buttons {
+              display: flex;
+              justify-content: flex-end;
+              margin-top: 10px;
+            }
+          
+            .chat-buttons button {
+              padding: 5px 10px;
+              margin-left: 5px;
+              border: none;
+              background-color: #4caf50;
+              color: white;
+              cursor: pointer;
+              border-radius: 3px;
+            }
+          
+            .chat-buttons button:hover {
+              background-color: #45a049;
+            }
+/* The "dropdown" class is needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the button that is used to open the dropdown content */
+.dropdown-btn {
+  background-color:  #f9f8fa;
+  color: #717275;
+  padding: 8px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  font-family: var(--bs-font-sans-serif);
+}
+
+/* Style the dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color:  #f9f8fa;
+  color: #717275;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: var(--bs-font-sans-serif);
+  min-width: 220px; /* Adjust the width as needed */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Style the links inside the dropdown */
+.dropdown-content a {
+  display: block; /* Display the links in a block to stack them vertically */
+  color: #717275;
+  padding: 8px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: var(--bs-body-font-family);
+  border: none;
+}
+
+/* Change color on hover */
+.dropdown-content a:hover {
+  background-color: #f9f8fa;
+  color: black;
+}
+
+/* Show the dropdown content when the dropdown button is hovered over */
+.dropdown:hover .dropdown-content {
+  display: block;
+  color: #0d6efd;
+}
+
+/* Adjust the dropdown button style when the dropdown is hovered over */
+.dropdown:hover .dropdown-btn {
+  background-color: #f9f8fa;
+  color: #0d6efd;
+}
+
+
+
+</style>
+          
+<!--
+
+TemplateMo 567 Nomad Force
+
+https://templatemo.com/tm-567-nomad-force
+
+-->
+    </head>
+    
+    <body>
+        <main>
+
+            <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="http://127.0.0.1:8000/index">
+                        <strong>Farm Harvest   </strong>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                 <div class="collapse navbar-collapse" id="navbarNav">
+                    {% if request.session.admin %}
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="http://127.0.0.1:8000/index">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/product1">Add Products</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/view_users">View Users</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/view_product">View Products</a>
+                            </li>
+
+                            <li class="nav-item">
+                              <div class="dropdown"><button class="dropdown-btn nav-link">View Reports</button>
+                                <div class="dropdown-content">
+                                  <a class="nav-link" href="http://127.0.0.1:8000/report_crop">Crop Prediction Report</a>
+                                  <a class="nav-link" href="http://127.0.0.1:8000/report_fertilizer">Fertilizer Prediction Report</a>
+                                  <a class="nav-link" href="http://127.0.0.1:8000/report_product">Product Report</a>
+                                  <a class="nav-link" href="http://127.0.0.1:8000/report_transaction">Transaction Report</a>
+                                  <a class="nav-link" href="http://127.0.0.1:8000/report_user">User Report</a>
+                                </div>
+                              </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/purchase_history">View Transaction Details</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/logout">Logout</a>
+                            </li>
+
+                        </ul>
+
+            {% elif request.session.uid %}
+
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="http://127.0.0.1:8000/index">Home</a>
+                            </li>
+
+
+                            <li class="nav-item">
+                              <a href="#" onclick="openChat()" class="nav-link">Open Chat</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/edit_profile">Edit profile</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="http://127.0.0.1:8000/crop_prediction">Crop Prediction</a>
+                          </li>
+
+                             <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/ftlzr_prediction">Fertilizer Prediction</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/disease_pred">Plant Disease Detection</a>
+                            </li>
+
+                            <li class="nav-item">
+                              <a class="nav-link" href="http://127.0.0.1:8000/view_ftlzr">Buy Products</a>
+                            </li>
+
+                            <li class="nav-item">
+                              <a class="nav-link" href="http://127.0.0.1:8000/user_purchase_history">View Order Details</a>
+                          </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/logout">Logout</a>
+                            </li>
+
+                        </ul>
+
+            {% else %}
+
+                        <ul class="navbar-nav mx-auto">
+
+                            <li class="nav-item active">
+                                <a class="nav-link" href="http://127.0.0.1:8000/index">Home</a>  
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/registration">Register</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/login">Login</a>
+                            </li>
+
+                        </ul>
+            {% endif %}
+                    </div>
+                </div>
+            </nav>
+        
+{% endblock %}

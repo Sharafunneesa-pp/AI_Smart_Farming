@@ -1,0 +1,81 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+<style>
+    .section-spacing {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .table-container {
+        margin-bottom: 100px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 30%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<div class="table-container">
+    <center>
+        <table id="tblCustomers">
+            <tr>
+                <td colspan="2">
+                    <h4><center>Disease Data</center></h4>
+                </td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ result.file.url }}" width="90" height="90" alt=""></td></tr>
+                <tr>
+                    <th>Label</th>
+                    <td>{{ result.label }}</td>
+                </tr>
+                <tr>
+                    <th>Remedies</th>
+                    <td>{{ result.remedies }}</td>
+                </tr>
+                <tr>
+                    <th>Pesticides</th>
+                    <td>{{ result.pesticides }}</td>
+                </tr>
+   
+        </table>
+        <br>
+        <input type="button" class="btn btn-primary" id="btnExport" value="Download" onclick="Export()" />
+        <h4><a href="view_your_pesticide/{{result.pesticides}}">Click Here to Buy</a></h4>
+    </center>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        function Export() {
+            html2canvas(document.getElementById('tblCustomers'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("Plant_disease.pdf");
+                }
+            });
+        }
+    </script>
+{% include 'footer.html' %}
+{% include 'footer.html' %} 
+{% endblock %}

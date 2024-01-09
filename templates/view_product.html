@@ -1,0 +1,110 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<style>
+.table-view {
+    width: 100%;
+    margin: 20px;
+}
+
+.table-view table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-view th, .table-view td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.table-view th {
+    background-color: #f2f2f2;
+}
+
+.table-view tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-view tr:hover {
+    background-color: #e5e5e5;
+}
+  </style>
+
+<h2><center>FERTILIZER TABLE</center></h2>
+  <div class="container">
+    <div class="table-view">
+      <table id="tblCustomers1">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Crop type</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Product Image</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for i in result1 %}
+          <tr>
+            <td>{{i.product_name}}</td>
+            <td>{{i.crop_type}}</td>
+            <td>{{i.price}}</td>
+            <td>{{i.quantity}}</td>
+            <td><img src="media/{{i.image}}"style="width: 1in; height: 0.7in; max-width: 1in; max-height: 07in;"></td>
+            <td><a href="http://127.0.0.1:8000/update_product_details/{{i.id}}">Update</a></td>
+            <td><a href="http://127.0.0.1:8000/delete_product_details/{{i.id}}">Delete</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+<br>
+<br>
+<br>
+
+<h2><center>PESTICIDE TABLE</center></h2>
+
+<div class="container">
+  <div class="table-view">
+    <table id="tblCustomers1">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Crop type</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Product Image</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for i in result2 %}
+        <tr>
+          <td>{{i.product_name}}</td>
+          <td>{{i.crop_type}}</td>
+          <td>{{i.price}}</td>
+          <td>{{i.quantity}}</td>
+          <td><img src="media/{{i.image}}"style="width: 1in; height: 0.7in; max-width: 1in; max-height: 07in;"></td>
+          <td><a href="update_product_details/{{i.id}}">Update</a></td>
+          <td><a href="delete_product_details/{{i.id}}">Delete</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% include 'footer.html' %} 
+{% endblock %}

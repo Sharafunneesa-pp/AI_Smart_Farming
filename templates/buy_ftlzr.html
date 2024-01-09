@@ -1,0 +1,121 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+{% if message1 %}
+   <script>
+      alert('{{ msg }}');
+   </script>
+{% endif %}
+
+<section class=" contact section-padding" id="contact">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-7 col-12 mx-auto">
+
+                <h2 class="mb-4 text-center" data-aos="fade-up">Buy Product</h2>
+
+                <form action="addpurchase" method="post" class="contact-form" role="form" data-aos="fade-up" enctype="multipart/form-data">
+                    <div class="row">
+                        {% csrf_token %}
+                        
+                        <div class="col-lg-12 col-6">
+                            <label for="pr_id" class="form-label">Product ID</label>
+                            <input type="text" name="pr_id" readonly value="{{result.id}}" id="pr_id" class="form-control"  required>
+                        </div>
+
+                       <!--<div class="col-lg-12 col-6">
+                            <label for="product_name" class="form-label">Product Name</label>
+                            <input type="text" name="product_name" readonly value="{{result.product_name}}" id="product_name" class="form-control"  required>
+                        </div>-->
+
+                        <div class="col-lg-12 col-6">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" name="quantity" min="1" max="50" id="quantity" class="form-control" placeholder="How many Kg you want to buy" title="Invalid choice" required>
+                        </div>
+
+                        <div class="col-lg-12 col-6">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="text" name="rate" readonly value="{{result.price}}" id="price" class="form-control" readonly required>
+                        </div>
+
+                        <div class="col-lg-12 col-6">
+                            <label for="crop_type" class="form-label">Crop Type</label>
+                            <input type="text" name="crop_type" readonly value="{{result.crop_type}}" id="crop_type" class="form-control" readonly required>
+                        </div>
+
+                        
+
+                        <div class="col-lg-12 col-6">
+                            <label for="cardtype" class="form-label">Card Type</label>
+                            <select name="cardtype" id="cardtype" class="form-control" required>
+                                <option value="">Select Card Type</option>
+                                <option value="credit">Credit Card</option>
+                                <option value="debit">Debit Card</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-12 col-6">
+                            <label for="cardname" class="form-label">Card Name</label>
+                            <input type="text" name="cardname" id="cardname" class="form-control" placeholder="Enter the card name" pattern="^[a-zA-Z. ]+$" required>
+                        </div>
+
+                        <div class="col-lg-12 col-6">
+                            <label for="cardnumber" class="form-label">Card Number</label>
+                            <input type="text" name="cardnumber" id="cardnumber" class="form-control" placeholder="Enter the card number" pattern="^\d{16}$" required>
+                        </div>
+
+                        <div class="col-lg-12 col-6">
+                            <label for="cvv" class="form-label">CVV</label>
+                            <input type="text" name="cvv" id="cvv" class="form-control" placeholder="Enter the cvv number" pattern="^\d{3}$" required>
+                        </div>
+
+                        <!--<div class="col-lg-12 col-6">
+                            <label for="phone" class="form-label">User Name</label>
+                            <input type="text" name="name" id="name" class="form-control"  readonly value="{{result1.name}}"  required>
+                        </div>
+
+                        <div class="col-lg-12 col-6">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" name="phone" id="phone" class="form-control" placeholder="Enter the phone number" readonly value="{{result1.phone}}" pattern="^\d{10}$" required>
+                        </div>-->
+    
+                        <div class="col-lg-5 col-12 mx-auto mt-5">
+                            <button type="submit" class="form-control">Submit</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<script>
+    // Get references to the quantity and price input elements
+    const quantityInput = document.getElementById('quantity');
+    const priceInput = document.getElementById('price');
+
+    // Function to update the price based on the quantity
+    function updatePrice() {
+        const quantity = parseFloat(quantityInput.value);
+        const price = parseFloat("{{ result.price }}"); // Assuming "{{ result.price }}" is a valid numeric value
+
+        if (!isNaN(quantity) && !isNaN(price)) {
+            const totalPrice = quantity * price;
+            priceInput.value = totalPrice.toFixed(2); // Set the updated price to the price input field
+        }
+    }
+
+    // Add an event listener to the quantity input to call the updatePrice function when the user enters a quantity
+    quantityInput.addEventListener('input', updatePrice);
+</script>
+
+
+
+
+{% include 'footer.html' %} 
+{% endblock %}

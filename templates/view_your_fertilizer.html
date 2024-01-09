@@ -1,0 +1,84 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+<section class="news section-padding" id="news">
+    <style>
+        .product-card {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .product-image {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .product-image img {
+            height: 200px; /* Adjust the height as per your requirements */
+            object-fit: cover; /* Maintain aspect ratio and cover container */
+            object-position: center; /* Center the image within the container */
+        }
+
+        .product-details {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 20px;
+        }
+
+        .product-details h4 {
+            margin-top: 0;
+        }
+
+        .purchase-button {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 767px) {
+            .product-card {
+                flex-direction: column;
+            }
+
+            .product-image,
+            .product-details {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-5 text-center" data-aos="fade-up">Lets Buy</h2>
+            </div>
+
+            {% for i in result %}
+            <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/media/{{i.image}}" class="img-fluid" alt="">
+                    </div>
+                    <div class="product-details">
+                        <h4>{{i.product_name}}</h4>
+                        <p>Price: &#8377;{{i.price}}/kg</p>
+                        <p>Quantity: {{i.quantity}}kg</p>
+                        <p>Type of Crop: {{i.crop_type}}</p>
+                        <div class="purchase-button">
+                            <a href="http://127.0.0.1:8000/buy_product/{{i.id}}" class="btn btn-primary">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+
+{% include 'footer.html' %} 
+{% endblock %}

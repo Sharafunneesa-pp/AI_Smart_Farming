@@ -1,0 +1,92 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+<section class=" contact section-padding" id="contact">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-7 col-12 mx-auto">
+
+                <h2 class="mb-4 text-center" data-aos="fade-up">Fertilizer Prediciton</h2>
+
+                <form action="predict_ftlzr" method="post" class="contact-form" role="form" data-aos="fade-up">
+                    <div class="row">
+                        {% csrf_token %}
+                       
+                        <div class="col-lg-12 col-6">
+                            <label for="N" class="form-label">Nitrogen</label>
+                            <input type="text" name="N" id="N" class="form-control" placeholder="Enter nitrogen value" pattern="[0-9]+(\.[0-9]+)?" title="Please enter a numeric value" required>
+                        </div>
+                        
+                        <div class="col-lg-12 col-6">
+                            <label for="P" class="form-label">Phosphorus</label>
+                            <input type="text" name="P" id="P" class="form-control" placeholder="Enter phosphorus value" pattern="[0-9]+(\.[0-9]+)?" title="Please enter a numeric value" required>
+                        </div>
+                        
+                        <div class="col-lg-12 col-6">
+                            <label for="K" class="form-label">Potassium</label>
+                            <input type="text" name="K" id="K" class="form-control" placeholder="Enter potassium value" pattern="[0-9]+(\.[0-9]+)?" title="Please enter a numeric value" required>
+                        </div>
+                        
+                        <div class="col-lg-12 col-6">
+                            <label for="crop_type" class="form-label">Crop type</label>
+                            <select name="crop_type" id="crop_type" class="form-control" required>
+                                <option value="">Select Crop Type</option>
+                                <option value="rice">Rice</option>
+                                <option value="maize">Maize</option>
+                                <option value="chickpea">Chickpea</option>
+                                <option value="kidneybeans">Kidney Beans</option>
+                                <option value="pigeonpeas">Pigeon Peas</option>
+                                <option value="mothbeans">Moth Beans</option>
+                                <option value="mungbean">Mung Bean</option>
+                                <option value="blackgram">Black Gram</option>
+                                <option value="lentil">Lentil</option>
+                                <option value="pomegranate">Pomegranate</option>
+                                <option value="banana">Banana</option>
+                                <option value="mango">Mango</option>
+                                <option value="grapes">Grapes</option>
+                                <option value="watermelon">Watermelon</option>
+                                <option value="muskmelon">Muskmelon</option>
+                                <option value="apple">Apple</option>
+                                <option value="orange">Orange</option>
+                                <option value="papaya">Papaya</option>
+                                <option value="coconut">Coconut</option>
+                                <option value="cotton">Cotton</option>
+                                <option value="jute">Jute</option>
+                                <option value="coffee">Coffee</option>
+                            </select>
+                        </div>
+                        
+                       
+                    </div>
+
+                    <div class="col-lg-5 col-12 mx-auto mt-5">
+                        <button type="submit" class="form-control">Predict</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% if res2 %}
+<section class="section-padding" id="portfolio">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12">
+                <h2 class="mb-5 text-center" data-aos="fade-up">Result</h2>
+            </div>
+            <div class="col-12">
+                <h3 class="mb-5 text-center" data-aos="fade-up">{{res2}}</h3>
+            </div>
+            <div class="col-12">
+                <u><a href="print_ftlzr/{{res3}}" class="text-center"><h5>Download result</h5></a></u>
+                <u><a href="http://127.0.0.1:8000/view_your_fertilizer/{{res2}}" class="text-center"><h5>Buy {{res2}}</h5></a></u>
+            </div>
+        </div>    
+    </div>
+</section>
+{% endif %}
+{% include 'footer.html' %} 
+{% endblock %}

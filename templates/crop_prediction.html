@@ -1,0 +1,84 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+
+
+<section class=" contact section-padding" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-12 mx-auto">
+
+                <h2 class="mb-4 text-center" data-aos="fade-up">Crop Prediciton</h2>
+
+                <form action="predict_crop" method="post" class="contact-form" role="form" data-aos="fade-up" style="margin-bottom: 10px;" >
+                    <div class="row">
+                        {% csrf_token %}
+                        
+                        <div class="col-lg-6 col-6">
+                            <label for="N" class="form-label">Nitrogen</label>
+                            <input type="number" name="N" id="N" class="form-control" placeholder="Enter nitragen value" title="Must be Number" required step="any">
+                        </div>
+
+                        <div class="col-lg-6 col-6">
+                            <label for="P" class="form-label">Phosphorus</label>
+                            <input type="number" name="P" id="P" class="form-control" placeholder="Enter phosphorus value" title="Must be Number"  required step="any">
+                        </div>
+
+                        <div class="col-lg-6 col-6">
+                            <label for="K" class="form-label">Pottassium</label>
+                            <input type="number" name="K" id="K" class="form-control" placeholder="Enter Pottassium value" title="Must be Number" required step="any">
+                        </div>
+
+                        <!--<div class="col-lg-6 col-6">
+                            <label for="rainfall" class="form-label">Rainfall</label>
+                            <input type="text" name="rainfall" id="rainfall" class="form-control" title="Must be number" min="0" max="500" placeholder="Enter the Rainfall value " pattern="[-+]?[0-9]*\.?[0-9]+" required step="any">
+                        </div>-->
+
+                        <div class="col-lg-6 col-6">
+                            <label for="temperature" class="form-label">Place</label>
+                            <input type="text" name="temperature" id="temperature" class="form-control"  pattern="[a-zA-Z. ]+$" title="Must be letters"  placeholder="Enter the place " required step="any">
+                        </div>
+
+                        <div class="col-lg-6 col-6">
+                            <label for="ph" class="form-label">Ph</label>
+                            <input type="number" name="ph" id="ph" class="form-control"  min="0" max="14" placeholder="Enter ph value" title="Must be Number"  required step="any">
+                        </div>
+
+                       
+                    </div>
+
+                    <div class="col-lg-5 col-12 mx-auto mt-5">
+                        <button type="submit" class="form-control">Predict</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% if res1 %}
+<section class="section-padding" id="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-5 text-center" data-aos="fade-up">Result</h2>
+            </div>
+
+            <div class="col-12">
+                <h2 class="mb-5 text-center" data-aos="fade-up">{{res1}}</h2>
+            </div>
+            <div class="col-12">
+                <u><a href="http://127.0.0.1:8000/print_crop/{{res2}}" class="text-center"><h5>Download Result</h5></a></u>
+            </div>
+            <div class="col-12">
+                <u><a href="http://127.0.0.1:8000/ftlzr_sugstn/{{res2}}" class="text-center"><h5>Suggest Fertilizer</h5></a></u>
+            </div>
+        </div>    
+    </div>
+</section>
+
+
+
+{% endif %}
+{% include 'footer.html' %} 
+{% endblock %}

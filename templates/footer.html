@@ -1,0 +1,107 @@
+{% block content %} 
+{% load static %}
+
+
+
+
+
+<script>
+    // Open the chatbot popup
+    function openChat() {
+    document.getElementById("myChat").style.display = "block";
+    }
+    
+    // Close the chatbot popup
+    function closeChat() {
+    document.getElementById("myChat").style.display = "none";
+    }
+
+    // Send the message to the Django backend
+    function sendMessage() {
+    const input = document.getElementById("chatInput");
+    const message = input.value;
+
+    // Display the user's message in the chat
+    displayMessage("user", message);
+
+    // Send the message to the Django backend
+    fetch(`http://127.0.0.1:8000/get_bot_response?message=${encodeURIComponent(message)}`)
+        .then(response => response.json())
+        .then(data => {
+        // Display the bot's response in the chat
+        const botResponse = data.response;
+        displayMessage("FarmAssist", botResponse);
+        })
+        .catch(error => {
+        console.error('Error:', error);
+        });
+
+    // Clear the input field
+    input.value = "";
+    }
+
+
+    
+    // Display a message in the chat
+    function displayMessage(sender, message) {
+    const chatMessages = document.getElementById("chatMessages");
+    const messageElement = document.createElement("p");
+    messageElement.textContent = `${sender}: ${message}`;
+    chatMessages.appendChild(messageElement);
+    }
+ 
+ </script>
+
+ <!-- Add the chatbot popup code  -->
+<div class="chat-popup" id="myChat">
+    <div class="chat-container">
+        <h3>Chat</h3>
+            <div id="chatMessages"></div>
+                <input type="text" id="chatInput" class="chat-input" placeholder="Type a message...">
+                    <div class="chat-buttons">
+                        <button onclick="sendMessage()">Send</button>
+                        <button onclick="closeChat()">Close</button>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-5 ms-auto">
+                <ul class="social-icon">
+                    <p>FarmAssist<br> Help Desk -0123-456-678<br>
+                     Helpline No: 011-24300606,155261 </p>
+                    
+                    
+                    <li><a href="#" class="social-icon-link bi-facebook"></a></li>
+
+                    <li><a href="#" class="social-icon-link bi-twitter"></a></li>
+
+                    <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+                    <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                    <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+</footer>
+
+<!-- JAVASCRIPT FILES -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/jquery.sticky.js' %}"></script>
+<script src="{% static 'js/aos.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/magnific-popup-options.js' %}"></script>
+<script src="{% static 'js/scrollspy.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>
+{% endblock %}

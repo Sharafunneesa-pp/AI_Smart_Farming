@@ -1,0 +1,99 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+<style>
+    .table-container {
+        margin-bottom: 100px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 30%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+</style>
+
+<div class="table-container">
+    <center>
+        <table id="tblCustomers">
+            <tr>
+                <td colspan="2">
+                    <h4><center>Crop Data</center></h4>
+                </td>
+            </tr>
+            <tr>
+                <th>Nitrogen</th>
+                <td>{{ result.N }}</td>
+            </tr>
+            <tr>
+                <th>Potassium</th>
+                <td>{{ result.K }}</td>
+            </tr>
+            <tr>
+                <th>Phosphorus</th>
+                <td>{{ result.P }}</td>
+            </tr>
+            <tr>
+                <th>Temperature</th>
+                <td>{{ result.temperature }}</td>
+            </tr>
+            <tr>
+                <th>Humidity</th>
+                <td>{{ result.humidity }}</td>
+            </tr>
+            <tr>
+                <th>Ph</th>
+                <td>{{ result.ph }}</td>
+            </tr>
+            <tr>
+                <th>Rainfall</th>
+                <td>{{ result.rainfall }}</td>
+            </tr>
+            <tr>
+                <th>Crop Type</th>
+                <td>{{ result.result }}</td>
+            </tr>
+            
+
+        </table>
+        <br>
+        <input type="button" class="btn btn-primary" id="btnExport" value="Download" onclick="Export()" />
+    </center>
+</div>
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        function Export() {
+            html2canvas(document.getElementById('tblCustomers'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("Crop_type.pdf");
+                }
+            });
+        }
+    </script>
+
+
+{% include 'footer.html' %} 
+{% endblock %}

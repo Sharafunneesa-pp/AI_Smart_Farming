@@ -1,0 +1,97 @@
+{% block content %}
+{% load static %}
+{% include 'header.html' %}
+
+<style>
+    .table-view {
+    width: 100%;
+    margin: 20px;
+}
+
+.table-view table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-view th, .table-view td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.table-view th {
+    background-color: #f2f2f2;
+}
+
+.table-view tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-view tr:hover {
+    background-color: #e5e5e5;
+}
+
+</style>
+<div class="container">
+    <div class="table-view">
+        <table id="tblCustomers1">
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Date</th>
+                    <th>Product Id</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Rate</th>
+                    <th>Card Type</th>
+                    <th>Card Name</th>
+                    <th>Card Number</th>
+                    <th>CVV</th>
+                    <th>Phone Number</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in result %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.pr_id}}</td>
+                    <td>{{i.product_name}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td>{{i.rate}}</td>
+                    <td>{{i.cardtype}}</td>
+                    <td>{{i.cardname}}</td>
+                    <td>{{i.cardnumber}}</td>
+                    <td>{{i.cvv}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.status}}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<center><input type="button" class="btn btn-primary" id="btnExport" value="Report" onclick="Export1()" /></center>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script type="text/javascript">
+      function Export1() {
+          html2canvas(document.getElementById('tblCustomers1'), {
+              onrendered: function (canvas) {
+                  var data = canvas.toDataURL();
+                  var docDefinition = {
+                      content: [{
+                          image: data,
+                          width: 500
+                      }]
+                  };
+                  pdfMake.createPdf(docDefinition).download("Purchase Report.pdf");
+              }
+          });
+      }
+  </script>
+{% include 'footer.html' %}
+{% endblock %}

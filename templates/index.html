@@ -1,0 +1,347 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+{% if msg_buy %}
+   <script>
+      alert('{{ msg_buy }}');
+   </script>
+{% endif %}
+
+{% if message1 %}
+   <script>
+      alert('{{ message1 }}');
+   </script>
+{% endif %}
+
+<section class="hero" id="hero">
+    <div class="heroText">
+        <h1 class="text-white mt-5 mb-lg-4" data-aos="zoom-in" data-aos-delay="800">
+        AI BASED CROP HARVESTING 
+        </h1>
+
+        <p class="text-secondary-white-color" data-aos="fade-up" data-aos-delay="1000">
+            An Assist to The <strong class="custom-underline">Farmer</strong>
+        </p>
+    </div>
+
+    <div class="videoWrapper">
+        <video autoplay="" loop="" muted="" class="custom-video" poster="{% static 'videos/Screenshot.jpg' %}">
+            <source src="{% static 'videos/videoplayback.mp4' %}" type="video/mp4">
+
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="overlay"></div>
+</section>
+<section class="news section-padding" id="news">
+    <style>
+        .product-card {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .product-image {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .product-image img {
+            height: 200px; /* Adjust the height as per your requirements */
+            object-fit: cover; /* Maintain aspect ratio and cover container */
+            object-position: center; /* Center the image within the container */
+        }
+
+        .product-details {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 20px;
+        }
+
+        .product-details h4 {
+            margin-top: 0;
+        }
+
+        .purchase-button {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 767px) {
+            .product-card {
+                flex-direction: column;
+            }
+
+            .product-image,
+            .product-details {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-5 text-center" data-aos="fade-up">Fertilizers</h2>
+            </div>
+
+            {% for i in result1 %}
+            <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="media/{{i.image}}" class="img-fluid" alt="">
+                    </div>
+                    <div class="product-details">
+                        <h4>{{i.product_name}}</h4>
+                        <p>Price: &#8377;{{i.price}}/kg</p>
+                        <p>Quantity: {{i.quantity}}kg</p>
+                        <p>Type of Crop: {{i.crop_type}}</p>
+                        <!-- <div class="purchase-button">
+                            <a href="buy_ftlzr/{{i.id}}" class="btn btn-primary">Purchase</a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-5 text-center" data-aos="fade-up">Pesticides</h2>
+            </div>
+
+            {% for i in result2 %}
+            <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="media/{{i.image}}" class="img-fluid" alt="">
+                    </div>
+                    <div class="product-details">
+                        <h4>{{i.product_name}}</h4>
+                        <p>Price: &#8377;{{i.price}}/kg</p>
+                        <p>Quantity: {{i.quantity}}kg</p>
+                        <p>Type of Crop: {{i.crop_type}}</p>
+                        <!-- <div class="purchase-button">
+                            <a href="buy_ftlzr/{{i.id}}" class="btn btn-primary">Purchase</a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+            <!-- <section class="section-padding" id="portfolio">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h2 class="mb-5 text-center" data-aos="fade-up">Portfolio</h2>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="portfolio-thumb mb-5" data-aos="fade-up">
+                                <a href="{% static 'images/portfolio/visuals-Y4qzW3AsvqI-unsplash.jpeg' %}" class="image-popup">
+                                    <img src="{% static 'images/portfolio/visuals-Y4qzW3AsvqI-unsplash.jpeg' %}" class="img-fluid portfolio-image" alt="">
+                                </a>
+
+                                <div class="portfolio-info">                     
+                                    <h4 class="portfolio-title mb-0">Effortless</h4>
+
+                                    <p class="text-danger">Branding</p>
+                                </div>
+                            </div> 
+
+                            <div class="portfolio-thumb" data-aos="fade-up">
+                                <a href="{% static 'images/portfolio/severin-candrian-nn3uIZqmUtE-unsplash.jpeg' %}" class="image-popup">
+                                    <img src="{% static 'images/portfolio/severin-candrian-nn3uIZqmUtE-unsplash.jpeg' %}" class="img-fluid portfolio-image" alt="">
+                                </a>
+
+                                <div class="portfolio-info">                     
+                                    <h4 class="portfolio-title mb-0">Health technology</h4>
+
+                                    <p class="text-success">Art Direction</p>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="portfolio-thumb mt-5 mt-lg-0 mb-5" data-aos="fade-up">
+                                <a href="{% static 'images/portfolio/tyler-nix-Y1drF0Y3Oe0-unsplash.jpeg' %}" class="image-popup">
+                                    <img src="{% static 'images/portfolio/tyler-nix-Y1drF0Y3Oe0-unsplash.jpeg' %}" class="img-fluid portfolio-image" alt="">
+                                </a>
+
+                                <div class="portfolio-info">                     
+                                    <h4 class="portfolio-title mb-0">Maki</h4>
+
+                                    <p class="text-warning">Website</p>
+                                </div>
+                            </div> 
+
+                            <div class="portfolio-thumb" data-aos="fade-up">
+                                <a href="{% static 'images/portfolio/thought-catalog-gv-T-OjLe4c-unsplash.jpeg' %}" class="image-popup">
+                                    <img src="{% static 'images/portfolio/thought-catalog-gv-T-OjLe4c-unsplash.jpeg' %}" class="img-fluid portfolio-image" alt="">
+                                </a>
+
+                                <div class="portfolio-info">                     
+                                    <h4 class="portfolio-title mb-0">The gig economy</h4>
+
+                                    <p class="text-info">Graphic</p>
+                                </div>
+                            </div> 
+                        </div>
+
+                    </div>
+                </div>
+            </section> -->
+
+            <!-- <section class="news section-padding" id="news">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h2 class="mb-5 text-center" data-aos="fade-up">News & Events</h2>
+                        </div>
+
+                        <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                            <div class="news-thumb" data-aos="fade-up">
+                                <a href="news-detail.html" class="news-image-hover news-image-hover-warning">
+                                    <img src="{% static 'images/news/caroline-lm-uqveD8dYPUM-unsplash.jpg' %}" class="img-fluid large-news-image news-image" alt="">
+                                </a>
+
+                                <div class="news-category bg-warning text-white">News</div>
+                                
+                                <div class="news-text-info">
+                                    <h5 class="news-title">
+                                        <a href="news-detail.html" class="news-title-link">The rise of the gig economy spells the end for these workers the old system</a>
+                                    </h5>
+
+                                    <span class="text-muted">22 hours ago</span>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="news-thumb news-two-column d-flex flex-column flex-lg-row" data-aos="fade-up">
+                                <div class="news-top w-100">
+                                    
+                                    <a href="news-detail.html" class="news-image-hover news-image-hover-primary">
+                                        <img src="{% static 'images/news/jean-philippe-delberghe-MmanXAs1sKw-unsplash.jpeg' %}" class="img-fluid news-image" alt="">
+                                    </a>
+
+                                    <div class="news-category bg-primary text-white">Events</div>
+                                </div>
+                                
+                                <div class="news-bottom w-100">
+                                    <div class="news-text-info">
+                                        <h5 class="news-title">
+                                            <a href="news-detail.html" class="news-title-link">Job Opportunities: Digital, Marketing</a>
+                                        </h5>
+
+                                        <div class="d-flex flex-wrap">
+                                            <span class="text-muted me-2">
+                                                <i class="bi-geo-alt-fill me-1 mb-2 mb-lg-0"></i>
+                                                Alaska,
+                                            </span>
+
+                                            <span class="text-muted">August 6, 2021</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div class="news-thumb news-two-column d-flex flex-column flex-lg-row" data-aos="fade-up">
+                                <div class="news-top w-100" data-aos="fade-up">
+                                    
+                                    <a href="news-detail.html" class="news-image-hover news-image-hover-success">
+                                        <img src="{% static 'images/news/maria-stewart-p4tj0g-_aMM-unsplash.jpeg' %}" class="img-fluid news-image" alt="">
+                                    </a>
+
+                                    <div class="news-category bg-success text-white">News</div>
+                                </div>
+                                
+                                <div class="news-bottom w-100">
+                                    <div class="news-text-info">
+                                        <h5 class="news-title">
+                                            <a href="news-detail.html" class="news-title-link">What happened to new viral video?</a>
+                                        </h5>
+
+                                        <span class="text-muted">6 days ago</span>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+
+                    </div>
+                </div>
+            </section> -->
+
+
+            <!-- <script>
+                // Open the chatbot popup
+             function openChat() {
+               document.getElementById("myChat").style.display = "block";
+             }
+             
+             // Close the chatbot popup
+             function closeChat() {
+               document.getElementById("myChat").style.display = "none";
+             }
+
+           // Send the message to the Django backend
+            function sendMessage() {
+            const input = document.getElementById("chatInput");
+            const message = input.value;
+
+            // Display the user's message in the chat
+            displayMessage("user", message);
+
+            // Send the message to the Django backend
+            fetch(`http://127.0.0.1:8000/get_bot_response?message=${encodeURIComponent(message)}`)
+                .then(response => response.json())
+                .then(data => {
+                // Display the bot's response in the chat
+                const botResponse = data.response;
+                displayMessage("FarmAssist", botResponse);
+                })
+                .catch(error => {
+                console.error('Error:', error);
+                });
+
+            // Clear the input field
+            input.value = "";
+            }
+        
+
+             
+             // Display a message in the chat
+             function displayMessage(sender, message) {
+               const chatMessages = document.getElementById("chatMessages");
+               const messageElement = document.createElement("p");
+               messageElement.textContent = `${sender}: ${message}`;
+               chatMessages.appendChild(messageElement);
+             }
+             
+             </script>-->
+
+             <!-- Add the chatbot popup code  -->
+            <!-- <div class="chat-popup" id="myChat">
+                <div class="chat-container">
+                    <h3>Chat</h3>
+                        <div id="chatMessages"></div>
+                            <input type="text" id="chatInput" class="chat-input" placeholder="Type a message...">
+                                <div class="chat-buttons">
+                                    <button onclick="sendMessage()">Send</button>
+                                    <button onclick="closeChat()">Close</button>
+                                </div>
+                        </div>
+                </div>
+            </div> -->
+              
+
+
+        </main>
+{% include 'footer.html' %} 
+{% endblock %}

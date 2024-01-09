@@ -1,0 +1,116 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+<section class=" contact section-padding" id="contact">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-7 col-12 mx-auto">
+
+                <h2 class="mb-4 text-center" data-aos="fade-up">REGISTRATION</h2>
+
+                <form action="register" method="post" class="contact-form" role="form" data-aos="fade-up">
+                    <div class="row">
+                        {% csrf_token %}
+                        
+                        <div class="col-lg-6 col-6">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" pattern="^[a-zA-Z. ]+$" title="Name must contain only letters." required>
+                        </div>
+
+                        <div class="col-lg-6 col-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email" pattern="^[a-zA-Z0-9_]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="form-control" placeholder="Your Email ID" title="email must contain @ and .only letters." required>
+                        </div>
+
+                        <div class="col-lg-6 col-6">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Your Password" pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$" required>
+                        </div>
+
+                        <div class="col-lg-6 col-6">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" name="phone" id="phone" class="form-control" placeholder="Your Phone Number" pattern="^\d{10}$"  required>
+                        </div>
+
+                        <div class="col-12 my-4">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea name="address" rows="3" class="form-control" id="address" placeholder="Your Address" required></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-5 col-12 mx-auto mt-5">
+                        <button type="submit" class="form-control">REGISTER</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    // Get the form fields
+    const nameField = document.getElementById('name');
+    const emailField = document.getElementById('email');
+    const passwordField = document.getElementById('password');
+    const phoneField = document.getElementById('phone');
+
+    // Add event listeners for form validation
+    nameField.addEventListener('input', validateName);
+    emailField.addEventListener('input', validateEmail);
+    passwordField.addEventListener('input', validatePassword);
+    phoneField.addEventListener('input', validatePhone); 
+
+    function validateName() {
+        const nameValue = nameField.value.trim();
+        const nameRegex = /^[a-zA-Z. ]+$/;
+
+        if (!nameRegex.test(nameValue)) {
+            nameField.setCustomValidity();
+        } else {
+            nameField.setCustomValidity('');
+        }
+    }
+
+    function validateEmail() {
+        const emailValue = emailField.value.trim();
+        const emailRegex = /^[^@]+@[^@]+$/;
+
+        if (!emailRegex.test(emailValue)) {
+            emailField.setCustomValidity('Email must contain "@" symbol.');
+        } else {
+            emailField.setCustomValidity('');
+        }
+    }
+
+    function validatePassword() {
+        const passwordValue = passwordField.value.trim();
+        const passwordRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+
+        if (!passwordRegex.test(passwordValue)) {
+            passwordField.setCustomValidity('Password must be 8 characters long and contain at least one letter, one number, and one symbol.');
+        } else {
+            passwordField.setCustomValidity('');
+        }
+    }
+
+    function validatePhone() {
+        const phoneValue = phoneField.value.trim();
+        const phoneRegex = /^\d{10}$/;
+
+        if (!phoneRegex.test(phoneValue)) {
+            phoneField.setCustomValidity('Phone number must contain exactly 10 digits.');
+        } else {
+            phoneField.setCustomValidity('');
+        }
+    }
+</script>
+
+
+{% include 'footer.html' %} 
+{% endblock %}

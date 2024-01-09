@@ -1,0 +1,50 @@
+{% block content %} 
+{% load static %} 
+{% include 'header.html' %} 
+
+
+{% if msg %}
+   <script>
+      alert('{{ msg }}');
+   </script>
+{% endif %}
+
+<section class=" contact section-padding" id="contact">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-7 col-12 mx-auto">
+
+                <h2 class="mb-4 text-center" data-aos="fade-up">Login</h2>
+
+                <form action="check_login" method="post" class="contact-form" role="form" data-aos="fade-up">
+                    {% csrf_token %}
+
+                    <div class="row">
+
+                        <div class="col-lg-6 col-6">
+                            <label for="email" class="form-label">Email</label>
+
+                            <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Your Email ID" required>
+                        </div>
+
+                        <div class="col-lg-6 col-6">
+                            <label for="password" class="form-label">Password</label>
+
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Your Password" required>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-5 col-12 mx-auto mt-5">
+                        <button type="submit" class="form-control">Sign In</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html' %} 
+{% endblock %}

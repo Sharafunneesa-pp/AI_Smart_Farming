@@ -1,0 +1,69 @@
+{% block content %}
+{% load static %}
+{% include 'header.html' %}
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<style>
+.table-view {
+    width: 100%;
+    margin: 20px;
+}
+
+.table-view table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-view th, .table-view td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.table-view th {
+    background-color: #f2f2f2;
+}
+
+.table-view tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-view tr:hover {
+    background-color: #e5e5e5;
+}
+  </style>
+
+<h2><center>User Details</center></h2>
+  
+ <div class="container">
+    <div class="table-view">
+      <table id="tblCustomers1">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone no</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody>
+    {% for i in user %}
+            <tr>
+              <td>{{ i.name }}</td>
+              <td>{{ i.email }}</td>
+              <td>{{ i.phone }}</td>
+              <td>{{ i.address }}</td>
+            </tr>
+    {% endfor %}
+          </tbody>
+        </table>
+      </div>
+     </div> 
+
+{% include 'footer.html' %}
+{% endblock %}
